@@ -1,11 +1,17 @@
 namespace Boncu_Nicole_Beatrice_Lab7;
 using Boncu_Nicole_Beatrice_Lab7.Models;
+using System.Collections;
 public partial class ListEntryPage : ContentPage
 {
 	public ListEntryPage()
 	{
 		InitializeComponent();
 	}
+    protected override async void OnAppearing()
+    {
+        base.OnAppearing();
+        listView.ItemsSource = await App.Database.GetShopListsAsync();
+    }
     async void OnSaveButtonClicked(object sender, EventArgs e)
     {
         var slist = (ShopList)BindingContext;
@@ -19,17 +25,12 @@ public partial class ListEntryPage : ContentPage
         await App.Database.DeleteShopListAsync(slist);
         await Navigation.PopAsync();
     }
-    protected override async void OnAppearing()
-    {
-        base.OnAppearing();
-        listView.ItemsSource = await App.Database.GetShopListsAsync();
-    }
     async void OnShopListAddedClicked(object sender, EventArgs e)
     {
         await Navigation.PushAsync(new ListPage
         {
             BindingContext = new ShopList()
-        }) ;
+        });
     }
     async void OnListViewItemSelected(object sender, SelectedItemChangedEventArgs e)
     {
@@ -41,4 +42,6 @@ public partial class ListEntryPage : ContentPage
             });
         }
     }
+   
+  
 }
