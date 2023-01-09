@@ -9,7 +9,7 @@
                 <Editor.Behaviors>
                     <local:ValidationBehaviour />
                 </Editor.Behaviors>
-            </Editor>           
+            </Editor>            <Picker x:Name="ShopPicker" Title="Enter Shop Name"/>
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*" />
@@ -17,6 +17,7 @@
                 </Grid.ColumnDefinitions>
                 <Button Text="Save" Clicked="OnSaveButtonClicked" />
                 <Button Grid.Column="1" Text="Delete" Clicked="OnDeleteButtonClicked"/>
+            
             </Grid>
             <ListView x:Name="listView" Margin="20">
                 <ListView.ItemTemplate>
